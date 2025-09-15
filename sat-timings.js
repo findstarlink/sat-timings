@@ -6,25 +6,7 @@ if (typeof module !== "undefined") {
     SunCalc = require('suncalc');
     tzlookup = require('tz-lookup');
 
-    module.exports = new StarlinkSatTimings();
-}
-
-function StarlinkSatTimings() {
-    var parent = new SatTimings();
-
-    this.getVisibleTimes = function(sat, latitude, longitude, opts) {
-        var res = parent.getVisibleTimes(sat, latitude, longitude, opts);
-
-        return res;
-    };
-
-    this.getSatellitePath = function(sat, mins) { // -X mins to +X mins
-        return parent.getSatellitePath(sat, mins);
-    };
-
-    this.getCurrentSatelliteCoords = function(sat) {
-        return parent.getCurrentSatelliteCoords(sat);
-    };
+    module.exports = new SatTimings();
 }
 
 function SatTimings() {
