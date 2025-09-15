@@ -1,0 +1,49 @@
+# Generated initially using github-actions-wizard (https://github.com/cmdr2/github-actions-wizard)
+
+name: CI Pipeline
+run-name: CI Pipeline
+on:
+  release:
+    types:
+    - created
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Copy files into the build
+      run: |-
+        mkdir build
+        rsync -av --exclude '.git' --exclude '.github' --exclude 'README.md' --exclude 'LICENSE' --exclude 'build' ./ build/
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: build
+        path: build
+  deploy_to_npm_on_release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    if: github.event_name == 'release' && github.event.action == 'created'
+    needs: build
+    steps:
+    - name: Download Artifact
+      uses: actions/download-artifact@v5
+      with:
+        name: build
+        path: .
+    - name: Set up Node.js
+      uses: actions/setup-node@v5
+      with:
+        node-version: lts
+        cache: npm
+    - name: Publish to npm
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: |-
+        npm install
+        npm publish
