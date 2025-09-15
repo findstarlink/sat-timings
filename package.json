@@ -1,0 +1,18 @@
+{
+  "name": "sat-timings",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sat-timings.js",
+  "dependencies": {
+    "moment-timezone": "^0.5.27",
+    "satellite.js": "^4.0.0",
+    "suncalc": "^1.8.0",
+    "tz-lookup": "^6.1.25"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node test.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
