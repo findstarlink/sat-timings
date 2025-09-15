@@ -1,6 +1,6 @@
 # sat-timings
 
-A Node.js library for predicting the visibility timings and path of satellites (e.g., Starlink) for a given location and time.
+Javascript library for predicting the visibility timings and path of satellites (e.g., Starlink) for a given location and time.
 
 ## Installation
 
