@@ -1,2 +1,2 @@
-# sat-timings
-The core library used to predict the path of satellites
+# satellite-path-predictor
+A library for predicting the visibility timings and path of satellites.
