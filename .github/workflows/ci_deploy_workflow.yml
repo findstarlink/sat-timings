@@ -57,6 +57,9 @@ jobs:
       with:
         name: build
         path: .
+    - name: Remove unnecessary files
+      run: |-
+        rm test.js
     - name: Set up Node.js
       uses: actions/setup-node@v5
       with:
