@@ -2,6 +2,8 @@
 
 Javascript library for predicting the visibility timings and path of satellites (e.g., Starlink) for a given location and time.
 
+This library powers [findstarlink.com](https://findstarlink.com) and has served millions of satellite visibility predictions over the past 6 years.
+
 ## Installation
 
 ```sh
