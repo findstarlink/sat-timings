@@ -70,4 +70,4 @@ jobs:
       run: npm install
 
     - name: Publish to npm
-      run: npm publish --provenance
+      run: npm publish --provenance --verbose
