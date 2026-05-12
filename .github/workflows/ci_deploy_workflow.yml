@@ -66,9 +66,8 @@ jobs:
         node-version: 22.x
         cache: npm
         registry-url: https://registry.npmjs.org
+    - name: Install dependencies
+      run: npm install
+
     - name: Publish to npm
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      run: |-
-        npm install
-        npm publish
+      run: npm publish --provenance
