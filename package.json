@@ -3,6 +3,9 @@
   "version": "2.0.0",
   "description": "",
   "main": "sat-timings.js",
+  "repository": {
+    "url": "https://github.com/findstarlink/sat-timings"
+  },
   "dependencies": {
     "moment-timezone": "^0.5.27",
     "satellite.js": "^7.0.0",
