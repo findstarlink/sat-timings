@@ -23,14 +23,29 @@ const predict = require('sat-timings');
 ```js
 const predict = require('sat-timings');
 
-// Example satellite object (from TLE data)
+// Example satellite object (from OMM JSON data)
 const sat = {
 	name: "starlink-1000",
 	title: "Starlink-1000",
-	tle: [
-		"1 44713U 19074A   21275.12345678  .00001234  00000-0  10270-4 0  9991",
-		"2 44713  53.0000  67.0000 0001000  90.0000 270.0000 15.05555555    10"
-	],
+	omm: {
+		OBJECT_NAME: "STARLINK-1000",
+		OBJECT_ID: "2019-074A",
+		EPOCH: "2026-05-11T01:54:42.000019",
+		MEAN_MOTION: 15.46630629,
+		ECCENTRICITY: 0.0001583,
+		INCLINATION: 53.1537,
+		RA_OF_ASC_NODE: 245.8068,
+		ARG_OF_PERICENTER: 17.3194,
+		MEAN_ANOMALY: 111.7477,
+		EPHEMERIS_TYPE: 0,
+		CLASSIFICATION_TYPE: "C",
+		NORAD_CAT_ID: 44713,
+		ELEMENT_SET_NO: 131,
+		REV_AT_EPOCH: 1,
+		BSTAR: 0.00022517,
+		MEAN_MOTION_DOT: 0.00011433,
+		MEAN_MOTION_DDOT: 0
+	},
 	stdMag: 5,
 	launchDate: "2020-04-22"
 };
@@ -48,7 +63,7 @@ The result is an object with fields like:
 ```json
 {
 	"currentLocalTime": { "time": "6:21 pm", "date": "23 Jan 2020", "epoch": 1579861567 },
-	"tleDate": 1579861567,
+	"elementEpoch": 1579861567,
 	"timezone": "Europe/London",
 	"sunrise": "5:45 am",
 	"sunset": "6:32 pm",
@@ -97,14 +112,14 @@ console.log(path);
 
 ### `getVisibleTimes(sat, latitude, longitude, options)`
 
-- `sat`: Satellite object with fields `{ name, title, tle, stdMag, launchDate }`
+- `sat`: Satellite object with fields `{ name, title, omm, stdMag, launchDate }`
 - `latitude`, `longitude`: Observer's location
 - `options` (optional):
 	- `daysCount`: Number of days to predict (default: 5)
 	- `timeOfDay`: 'morning', 'evening', or 'all' (default: 'all')
 	- `startDaysOffset`: Offset from today (default: 0)
 
-Returns: Object with current time, timezone, sunrise/sunset, and an array of visible timings.
+Returns: Object with current time, `elementEpoch`, timezone, sunrise/sunset, and an array of visible timings.
 
 ### `getSatellitePath(sat, mins)`
 

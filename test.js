@@ -2,7 +2,7 @@ const predict = require('./sat-timings');
 
 async function test() {
     console.log("Fetching satellite data...");
-    let sats = await fetch('https://data.findstarlink.com/tle.json')
+    let sats = await fetch('https://data.findstarlink.com/sat-data.json')
     sats = await sats.json();
     sats = sats.satellites;
 
@@ -25,7 +25,11 @@ async function test() {
 
     const DAYS_COUNT = 5;
 
-    var res = predict.getVisibleTimes(sat, coord.latitude, coord.longitude, {daysCount: DAYS_COUNT, startDaysOffset: -1});
+    var res = predict.getVisibleTimes(sat, coord.latitude, coord.longitude, { daysCount: DAYS_COUNT, startDaysOffset: -1 });
+
+    if (res.elementEpoch === undefined) {
+        throw new Error("No element epoch generated!");
+    }
 
     console.log(JSON.stringify(res, null, 2));
 

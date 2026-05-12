@@ -13,13 +13,13 @@ jobs:
       contents: read
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
     - name: Copy files into the build
       run: |-
         mkdir build
         rsync -av --exclude '.git' --exclude '.github' --exclude 'build' ./ build/
     - name: Upload Artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: build
         path: build
@@ -30,12 +30,12 @@ jobs:
     needs: build
     steps:
     - name: Download Artifact
-      uses: actions/download-artifact@v5
+      uses: actions/download-artifact@v7
       with:
         name: build
         path: .
     - name: Set up Node.js
-      uses: actions/setup-node@v5
+      uses: actions/setup-node@v6
       with:
         node-version: 22.x
         cache: npm
@@ -53,7 +53,7 @@ jobs:
     needs: test
     steps:
     - name: Download Artifact
-      uses: actions/download-artifact@v5
+      uses: actions/download-artifact@v7
       with:
         name: build
         path: .
@@ -61,7 +61,7 @@ jobs:
       run: |-
         rm test.js
     - name: Set up Node.js
-      uses: actions/setup-node@v5
+      uses: actions/setup-node@v6
       with:
         node-version: 22.x
         cache: npm
